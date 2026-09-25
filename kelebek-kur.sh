@@ -15,7 +15,12 @@ curl -fsSL https://kelebeksinav.org/amblem.png -o public/images/kelebek.png
 # 4) BentoPDF'i derle (ayarlar Cloudflare'deki ortam değişkenlerinden gelir)
 npm run build
 
-# 5) Kelebek görünümü: her sayfaya açık tema ve "çerçeve içinde" betiği
+# 5) Kelebek görünümü: her sayfaya açık tema ve "çerçeve içinde" betiği.
+#    Dosya adına derleme zamanı eklenir (kb-1790000000.css). BentoPDF'in çevrimdışı
+#    önbelleği (sw.js) dosyaları ADINA göre saklıyor; ad değişmezse tarayıcı eskisini
+#    göstermeye devam ederdi. Böylece her güncelleme herkese kendiliğinden ulaşır.
 SURUM=$(date +%s)
-find dist -name '*.html' -print0 | xargs -0 sed -i "s#</head>#<link rel=\"stylesheet\" href=\"/kelebek.css?v=$SURUM\"><script src=\"/kelebek.js?v=$SURUM\"></script></head>#"
-echo "Kelebek görünümü $(grep -rl 'kelebek.css' dist --include='*.html' | wc -l) sayfaya eklendi."
+cp public/kelebek.css "dist/kb-$SURUM.css"
+cp public/kelebek.js "dist/kb-$SURUM.js"
+find dist -name '*.html' -print0 | xargs -0 sed -i "s#</head>#<link rel=\"stylesheet\" href=\"/kb-$SURUM.css\"><script src=\"/kb-$SURUM.js\"></script></head>#"
+echo "Kelebek görünümü (kb-$SURUM) $(grep -rl "kb-$SURUM.css" dist --include='*.html' | wc -l) sayfaya eklendi."
