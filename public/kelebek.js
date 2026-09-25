@@ -405,6 +405,23 @@
     if (document.body) { favoriKartlari(); favoriCiz(); }
   });
 
+  /* ---------------- 4) Kategori aç/kapa okları ----------------
+     BentoPDF kapatırken yüksekliği bir sonraki kareye (requestAnimationFrame) bırakıyor;
+     bazı tarayıcılarda çerçeve içinde o kare gecikince bölüm kapanmıyordu. Kısa süre
+     sonra durumu denetleyip yarım kalan kapanmayı/açılmayı tamamlıyoruz. */
+  document.addEventListener('click', function (e) {
+    var bas = e.target && e.target.closest && e.target.closest('.category-header'); if (!bas) return;
+    var grup = bas.closest('.category-group'), kap = grup && grup.querySelector('.category-tools'); if (!kap) return;
+    setTimeout(function () {
+      if (grup.classList.contains('collapsed')) {
+        if (kap.style.maxHeight !== '0px') { kap.style.overflow = 'hidden'; kap.style.maxHeight = '0px'; }
+      } else if (kap.style.maxHeight === '0px' || (kap.style.maxHeight && kap.style.maxHeight !== 'none')) {
+        kap.style.maxHeight = kap.scrollHeight + 'px';
+        setTimeout(function () { if (!grup.classList.contains('collapsed')) { kap.style.maxHeight = 'none'; kap.style.overflow = 'visible'; } }, 450);
+      }
+    }, 120);
+  }, true);
+
   function basla() {
     gozle();
     ebeveyneGonder({ kb: 'hazir' });
