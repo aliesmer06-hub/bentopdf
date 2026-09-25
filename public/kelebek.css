@@ -69,6 +69,50 @@ input::placeholder, textarea::placeholder { color: #8a96ab; }
 ::-webkit-scrollbar-track { background: #f4f6fb; }
 ::-webkit-scrollbar-thumb { background: #cfd6e2; border-radius: 8px; }
 
+/* Kelebek'in yazı tipi */
+html:root { --font-sans: "Segoe UI", "Noto Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif; }
+body, button, input, select, textarea, .font-sans {
+  font-family: "Segoe UI", "Noto Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif !important;
+}
+
+/* koyu zemin için seçilmiş açık vurgu yazıları açık zeminde okunmuyordu → koyulaştır */
+.text-indigo-100, .text-indigo-200, .text-indigo-300, .text-indigo-400 { color: #4338ca !important; }
+.text-blue-100, .text-blue-200, .text-blue-300, .text-blue-400 { color: #1d4ed8 !important; }
+.text-sky-200, .text-sky-300, .text-sky-400, .text-cyan-300, .text-cyan-400 { color: #0369a1 !important; }
+.text-yellow-100, .text-yellow-200, .text-yellow-300, .text-yellow-400,
+.text-amber-200, .text-amber-300, .text-amber-400 { color: #92400e !important; }
+.text-orange-300, .text-orange-400 { color: #c2410c !important; }
+.text-green-200, .text-green-300, .text-green-400, .text-emerald-300, .text-emerald-400 { color: #047857 !important; }
+.text-red-200, .text-red-300, .text-red-400 { color: #b91c1c !important; }
+.text-purple-300, .text-purple-400, .text-violet-300, .text-violet-400 { color: #6d28d9 !important; }
+.text-pink-300, .text-pink-400 { color: #be185d !important; }
+/* koyu renkli yarı saydam kutular (bilgi/uyarı kutuları) açık tona */
+[class*="bg-indigo-900"], [class*="bg-indigo-950"], [class*="bg-blue-900"], [class*="bg-blue-950"] { background-color: #eef2ff !important; border-color: #c7d2fe !important; }
+[class*="bg-yellow-900"], [class*="bg-amber-900"], [class*="bg-yellow-950"], [class*="bg-amber-950"] { background-color: #fffbeb !important; border-color: #fde68a !important; }
+[class*="bg-red-900"], [class*="bg-red-950"] { background-color: #fef2f2 !important; border-color: #fecaca !important; }
+[class*="bg-green-900"], [class*="bg-green-950"], [class*="bg-emerald-900"] { background-color: #ecfdf5 !important; border-color: #a7f3d0 !important; }
+/* açılır pencerelerin arkasındaki kaplama: simsiyah yerine yarı saydam */
+.fixed.inset-0[class*="bg-black"], .fixed.inset-0[class*="bg-gray-900"] { background-color: rgba(15, 20, 35, 0.45) !important; }
+
+/* klavye kısayolu ayarları (dişli) öğretmenler için gereksiz */
+#open-shortcuts-btn { display: none !important; }
+
+/* araç sayfalarının altındaki tanıtım bölümleri (İngilizce SSS, "nasıl çalışır", ilgili araçlar) */
+body:not(.lp) > section { display: none !important; }
+
+/* ---- Favori Araçlarım (yalnızca Kelebek üyelerine) ---- */
+#kb-favori { margin: 0 0 8px; }
+.kb-favori-bas { display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 0; margin: 1.25rem 0 1rem;
+  font-size: 1.25rem; font-weight: 700; color: #1a2233; }
+.kb-favori-bas span { display: inline-flex; align-items: center; gap: 8px; }
+.kb-favori-bos { margin: 0 0 12px; padding: 14px 16px; border: 1px dashed #cfd6e2; border-radius: 12px; color: #5a6a80;
+  background: #ffffff; font-size: 14px; }
+.kb-yildiz { position: absolute; top: 8px; right: 8px; width: 30px; height: 30px; display: grid; place-items: center;
+  border: 0; border-radius: 8px; background: transparent; color: #aab4c5; cursor: pointer; opacity: 0; transition: opacity .15s, background .15s; }
+.tool-card:hover .kb-yildiz, .kb-yildiz.dolu, .kb-yildiz:focus-visible { opacity: 1; }
+.kb-yildiz:hover { background: #f1f3f8; color: #f5b301; }
+@media (hover: none) { .kb-yildiz { opacity: 1; } }
+
 /* ---- Kelebek'in içinde açıldığında ---- */
 html.kb-gomulu nav[data-simple-nav],
 html.kb-gomulu body > nav.sticky { display: none !important; }
