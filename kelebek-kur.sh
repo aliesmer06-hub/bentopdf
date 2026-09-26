@@ -24,3 +24,7 @@ cp public/kelebek.css "dist/kb-$SURUM.css"
 cp public/kelebek.js "dist/kb-$SURUM.js"
 find dist -name '*.html' -print0 | xargs -0 sed -i "s#</head>#<link rel=\"stylesheet\" href=\"/kb-$SURUM.css\"><script src=\"/kb-$SURUM.js\"></script></head>#"
 echo "Kelebek görünümü (kb-$SURUM) $(grep -rl "kb-$SURUM.css" dist --include='*.html' | wc -l) sayfaya eklendi."
+
+# 6) Sayfaları sunucuda Türkçeleştir (ilk anda "PDF Tools" görünmesin) ve
+#    dil dosyalarını önden indirmeye başla (daha hızlı açılış)
+node kelebek-cevir.mjs dist
